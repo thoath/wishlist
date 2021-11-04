@@ -1,7 +1,7 @@
 package br.com.labs.wishlist.domain.entities.impl;
 
 import br.com.labs.wishlist.domain.entities.WishList;
-import br.com.labs.wishlist.service.exception.MaxNumberOfProductsException;
+import br.com.labs.wishlist.domain.exception.MaxNumberOfProductsException;
 import java.util.HashSet;
 import java.util.Set;
 import lombok.Getter;
