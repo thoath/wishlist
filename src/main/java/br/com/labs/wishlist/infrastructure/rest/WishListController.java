@@ -27,7 +27,8 @@ import org.springframework.web.bind.annotation.RestController;
 @AllArgsConstructor
 public class WishListController {
 
-  public static final String USER_ID_INFO = "Id do usuário que essa lista pertence";
+  private static final String USER_ID_INFO = "Id do usuário que essa lista pertence";
+  private static final String WISHLIST_FORM_INFO = "Lista de desejos, contendo os produtos a serem adicionados";
   private CreateWishList createWishList;
   private UpdateWishList updateWishList;
   private DeleteProductFromWishList deleteWishList;
@@ -36,12 +37,9 @@ public class WishListController {
 
   @PostMapping("/{userId}")
   public ResponseEntity<WishList> createWishList(
-    @PathVariable
-    @ApiParam(USER_ID_INFO) String userId,
-    @RequestBody
-    @ApiParam("Lista de desejos, contendo os produtos a serem adicionados") WishListForm wishListForm
+    @PathVariable @ApiParam(USER_ID_INFO) String userId,
+    @RequestBody @ApiParam(WISHLIST_FORM_INFO) WishListForm wishListForm
   ) {
-
     return ResponseEntity
       .status(HttpStatus.CREATED)
       .body(createWishList.handle(userId, wishListForm));
@@ -49,12 +47,9 @@ public class WishListController {
 
   @PutMapping("/{userId}")
   public ResponseEntity<WishList> updateWishList(
-      @PathVariable
-      @ApiParam(USER_ID_INFO) String userId,
-      @RequestBody
-      @ApiParam("Lista de desejos, contendo os produtos a serem adicionados") WishListForm wishListForm
+    @PathVariable @ApiParam(USER_ID_INFO) String userId,
+    @RequestBody @ApiParam(WISHLIST_FORM_INFO) WishListForm wishListForm
   ) {
-
     return ResponseEntity
       .status(HttpStatus.RESET_CONTENT)
       .body(updateWishList.handle(userId, wishListForm));
@@ -62,19 +57,16 @@ public class WishListController {
 
   @DeleteMapping("/{userId}/{productId}")
   public ResponseEntity<WishList> deleteWishList(
-    @PathVariable
-    @ApiParam(USER_ID_INFO) String userId,
-    @PathVariable
-    @ApiParam("Produto a ser excluido da lista de desejos") String productId)
-  {
+    @PathVariable @ApiParam(USER_ID_INFO) String userId,
+    @PathVariable @ApiParam("Produto a ser excluido da lista de desejos") String productId
+  ) {
     deleteWishList.handle(userId, productId);
     return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
   }
 
   @GetMapping("/{userId}")
   public ResponseEntity<Set<String>> getWishList(
-      @PathVariable
-      @ApiParam(USER_ID_INFO) String userId
+    @PathVariable @ApiParam(USER_ID_INFO) String userId
   ) {
     return ResponseEntity.ok().body(findAllProductsFromWishList.handle(userId));
   }
@@ -82,8 +74,7 @@ public class WishListController {
   @GetMapping("/{userId}/{productId}")
   public ResponseEntity<SearchResult> getProductIsPartOfWishList(
     @PathVariable @ApiParam(USER_ID_INFO) String userId,
-    @PathVariable
-    @ApiParam("Produto a ser buscado da lista de desejos") String productId
+    @PathVariable @ApiParam("Produto a ser buscado da lista de desejos") String productId
   ) {
     return ResponseEntity.ok().body(findProductInWishList.handle(userId,productId));
   }
