@@ -11,7 +11,7 @@ Esta aplicação tem como objetivo disponibilizar as seguintes funcionalidades:
 ####Pré requisitos para executar o serviço
 * Maven instalado.
 * IDE de sua escolha.
-* O userId precisa estar no formato de objectId, segue link para gerar objectIds válidos: https://codepen.io/joshuajameshunt/pen/xWmNEr
+* O userId e os ids de produtos precisam estar no formato de objectId, segue link para gerar objectIds válidos: https://codepen.io/joshuajameshunt/pen/xWmNEr
 
 ####Inciando o seviço
 * Clonar repositório em sua máquina.

@@ -17,8 +17,7 @@ public class WishListControllerAdvice {
   private static final String WISH_LIST_ALREADY_EXIST = "Lista de desejos já existe.";
   private static final String WISH_LIST_NOT_FOUND = "Lista de desejos não existe.";
   private static final String MAX_NUMBER_OF_PRODUCTS = "Número de produtos atingiu seu limite máximo de 20.";
-  private static final String GENERIC_EXCEPTION = "Erro ao tentar processar sua requisição, favor tentar novamente mais tarde";
-  private static final String INVALID_USER_ID = "Id do usuário inválido, precisa ser uma string no formato de um ObjectId válido.";
+  private static final String INVALID_USER_ID = "Id do usuário ou do produto inválido, precisa ser uma string no formato de um ObjectId válido.";
 
   @ExceptionHandler(WishListAlreadyExistException.class)
   public ResponseEntity<ExceptionResponse> handleWishListAlreadyExistException(){
@@ -46,13 +45,6 @@ public class WishListControllerAdvice {
     return ResponseEntity.badRequest().body(exceptionResponse);
   }
 
-  @ExceptionHandler(Exception.class)
-  public ResponseEntity<ExceptionResponse> handleGenericException(){
-    var exceptionResponse =
-      new ExceptionResponse(GENERIC_EXCEPTION, HttpStatus.INTERNAL_SERVER_ERROR.value());
-
-    return ResponseEntity.internalServerError().body(exceptionResponse);
-  }
 
   @AllArgsConstructor
   @Getter
