@@ -18,6 +18,7 @@ public class WishListControllerAdvice {
   private static final String WISH_LIST_NOT_FOUND = "Lista de desejos não existe.";
   private static final String MAX_NUMBER_OF_PRODUCTS = "Número de produtos atingiu seu limite máximo de 20.";
   private static final String GENERIC_EXCEPTION = "Erro ao tentar processar sua requisição, favor tentar novamente mais tarde";
+  private static final String INVALID_USER_ID = "Id do usuário inválido, precisa ser uma string no formato de um ObjectId válido.";
 
   @ExceptionHandler(WishListAlreadyExistException.class)
   public ResponseEntity<ExceptionResponse> handleWishListAlreadyExistException(){
@@ -34,6 +35,14 @@ public class WishListControllerAdvice {
   @ExceptionHandler(MaxNumberOfProductsException.class)
   public ResponseEntity<ExceptionResponse> handleMaxNumberOfProductsException(){
     var exceptionResponse = new ExceptionResponse(MAX_NUMBER_OF_PRODUCTS, HttpStatus.UNPROCESSABLE_ENTITY.value());
+    return ResponseEntity.badRequest().body(exceptionResponse);
+  }
+
+  @ExceptionHandler(IllegalArgumentException.class)
+  public ResponseEntity<ExceptionResponse> handleInvalidUserIdException(){
+    var exceptionResponse =
+        new ExceptionResponse(INVALID_USER_ID, HttpStatus.BAD_REQUEST.value());
+
     return ResponseEntity.badRequest().body(exceptionResponse);
   }
 
