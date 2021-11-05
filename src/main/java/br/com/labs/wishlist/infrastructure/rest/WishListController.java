@@ -81,7 +81,7 @@ public class WishListController {
   )
   public ResponseEntity<WishList> deleteWishList(
     @PathVariable @ApiParam(USER_ID_INFO) String userId,
-    @PathVariable @ApiParam("Produto a ser excluido da lista de desejos") String productId
+    @PathVariable @ApiParam("Produto a ser excluido da lista de desejos, id do tipo ObjectId") String productId
   ) {
     deleteWishList.handle(userId, productId);
     return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
@@ -109,7 +109,7 @@ public class WishListController {
   )
   public ResponseEntity<SearchResult> getProductIsPartOfWishList(
     @PathVariable @ApiParam(USER_ID_INFO) String userId,
-    @PathVariable @ApiParam("Produto a ser buscado da lista de desejos") String productId
+    @PathVariable @ApiParam("Produto a ser buscado da lista de desejos, id do tipo ObjectId") String productId
   ) {
     return ResponseEntity.ok().body(findProductInWishList.handle(userId,productId));
   }
