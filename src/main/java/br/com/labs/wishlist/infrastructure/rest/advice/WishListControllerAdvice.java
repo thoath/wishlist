@@ -33,7 +33,7 @@ public class WishListControllerAdvice {
 
   @ExceptionHandler(MaxNumberOfProductsException.class)
   public ResponseEntity<ExceptionResponse> handleMaxNumberOfProductsException(){
-    var exceptionResponse = new ExceptionResponse(MAX_NUMBER_OF_PRODUCTS, HttpStatus.BAD_REQUEST.value());
+    var exceptionResponse = new ExceptionResponse(MAX_NUMBER_OF_PRODUCTS, HttpStatus.UNPROCESSABLE_ENTITY.value());
     return ResponseEntity.badRequest().body(exceptionResponse);
   }
 
